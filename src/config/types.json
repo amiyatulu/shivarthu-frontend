@@ -1,0 +1,10 @@
+{
+"Address": "MultiAddress",
+"LookupSource": "MultiAddress",
+"DepartmentDetails": {
+    "name": "Text",
+    "location": "Text",
+    "details": "Text",
+    "departmentid": "u128"
+  }
+}
