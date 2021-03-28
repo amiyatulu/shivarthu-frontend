@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react"
+import React, { useState, createRef, useContext } from "react"
 import { Route, Switch } from "react-router-dom"
 import {
   Container,
@@ -23,7 +23,8 @@ import NodeInfo from "./NodeInfo"
 import TemplateModule from "./TemplateModule"
 import Transfer from "./Transfer"
 import Upgrade from "./Upgrade"
-import CreateDepartmentForm from './appcomponents/CreateDepartmentForm';
+import CreateDepartmentForm from "./appcomponents/CreateDepartmentForm"
+import { SubContext } from "./commons/context/SubContext"
 
 function Main() {
   const [accountAddress, setAccountAddress] = useState(null)
@@ -69,6 +70,32 @@ function Main() {
       <Sticky context={contextRef}>
         <AccountSelector setAccountAddress={setAccountAddress} />
       </Sticky>
+      <SubContext.Provider
+        value={{
+          accountPair
+        }}
+      >
+        <Switch>
+          <Route path="/" exact component={SubstrateTemplate} />
+          <Route path="/createdepartment" component={CreateDepartmentForm} />
+        </Switch>
+      </SubContext.Provider>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <SubstrateContextProvider>
+      <Main />
+    </SubstrateContextProvider>
+  )
+}
+
+function SubstrateTemplate() {
+  const { accountPair } = useContext(SubContext)
+  return (
+    <React.Fragment>
       <Container>
         <Grid stackable columns="equal">
           <Grid.Row stretched>
@@ -94,17 +121,6 @@ function Main() {
         </Grid>
       </Container>
       <DeveloperConsole />
-    </div>
-  )
-}
-
-export default function App() {
-  return (
-    <SubstrateContextProvider>
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/createdepartment" component={CreateDepartmentForm}/>
-      </Switch>
-    </SubstrateContextProvider>
+    </React.Fragment>
   )
 }
