@@ -1,6 +1,6 @@
 import { web3FromSource } from '@polkadot/extension-dapp';
 
-const getFromAcct = async (accountPair) => {
+const getFromAcct = async (accountPair, api) => {
     const {
       address,
       meta: { source, isInjected },

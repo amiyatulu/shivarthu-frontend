@@ -24,7 +24,10 @@ import TemplateModule from "./TemplateModule"
 import Transfer from "./Transfer"
 import Upgrade from "./Upgrade"
 import CreateDepartmentForm from "./appcomponents/CreateDepartmentForm"
+import AddTestMap from './appcomponents/AddTestMap'
 import { SubContext } from "./commons/context/SubContext"
+import Example from './appcomponents/Example';
+
 
 function Main() {
   const [accountAddress, setAccountAddress] = useState(null)
@@ -78,6 +81,8 @@ function Main() {
         <Switch>
           <Route path="/" exact component={SubstrateTemplate} />
           <Route path="/createdepartment" component={CreateDepartmentForm} />
+          <Route path="/testmap" component={AddTestMap}/>
+          <Route path="/example" component={Example} />
         </Switch>
       </SubContext.Provider>
     </div>
